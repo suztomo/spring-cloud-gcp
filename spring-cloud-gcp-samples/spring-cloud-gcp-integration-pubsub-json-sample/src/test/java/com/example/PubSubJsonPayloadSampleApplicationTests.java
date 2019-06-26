@@ -45,7 +45,14 @@ import static org.junit.Assume.assumeThat;
  * @author Daniel Zou
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = { PubSubJsonPayloadApplication.class })
+@SpringBootTest(
+		webEnvironment = WebEnvironment.RANDOM_PORT,
+		classes = { PubSubJsonPayloadApplication.class },
+		properties = {
+				"spring.cloud.gcp.pubsub.publisher.retry.initial-rpc-timeout-seconds=999",
+				"spring.cloud.gcp.pubsub.publisher.retry.total-timeout-seconds=999",
+				"spring.cloud.gcp.pubsub.publisher.retry.max-rpc-timeout-seconds=999",
+				"spring.cloud.gcp.pubsub.publisher.retry.max-attempts=666" })
 public class PubSubJsonPayloadSampleApplicationTests {
 
 	@Autowired
@@ -53,10 +60,10 @@ public class PubSubJsonPayloadSampleApplicationTests {
 
 	@BeforeClass
 	public static void prepare() {
-		assumeThat(
-				"PUB/SUB-sample integration tests are disabled. Please use '-Dit.pubsub=true' "
-						+ "to enable them. ",
-				System.getProperty("it.pubsub"), is("true"));
+		// assumeThat(
+		// 		"PUB/SUB-sample integration tests are disabled. Please use '-Dit.pubsub=true' "
+		// 				+ "to enable them. ",
+		// 		System.getProperty("it.pubsub"), is("true"));
 	}
 
 	@Test
