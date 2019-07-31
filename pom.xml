@@ -224,7 +224,7 @@
 					<dependency>
 						<groupId>com.google.cloud.tools</groupId>
 						<artifactId>linkage-checker-enforcer-rules</artifactId>
-						<version>0.2.4-SNAPSHOT</version>
+						<version>0.2.5-SNAPSHOT</version>
 					</dependency>
 				</dependencies>
 				<executions>
@@ -238,7 +238,9 @@
 						<configuration>
 							<rules>
 								<LinkageCheckerRule
-										implementation="com.google.cloud.tools.dependencies.enforcer.LinkageCheckerRule"/>
+										implementation="com.google.cloud.tools.dependencies.enforcer.LinkageCheckerRule">
+									<reportOnlyReachable>true</reportOnlyReachable>
+								</LinkageCheckerRule>
 							</rules>
 							<fail>true</fail>
 						</configuration>
